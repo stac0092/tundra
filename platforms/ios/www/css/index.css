@@ -1,0 +1,14 @@
+.page {
+	display: none;
+}
+.active {
+	display: block;
+}
+
+.list-text{
+	color: blueviolet;
+}
+
+#bartop{
+	padding-top: 2rem;
+}
