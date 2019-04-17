@@ -5,7 +5,6 @@ let profileInfo = [];
 let rightSwipes = [];
 let rightSwipesKey = "hitIt";
 
-//let target = document.querySelector(".first");
 
 function init() {
     document.addEventListener("deviceready", ready);
@@ -77,7 +76,8 @@ function displayHomepage(){
     tiny.addEventListener("swipeleft", goAway);
     tiny.addEventListener("swiperight", stay);
 //     tiny.addEventListener("revealleft", removeFav);
-if (cards.length >= 3) {
+    let card = document.querySelectorAll(".card");
+    if (card.length <= 3) {
     console.log("Fetch more people")
     ready();
 }
