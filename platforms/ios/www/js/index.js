@@ -16,7 +16,7 @@ function init() {
     });
     let homepage = document.querySelectorAll('#homBtn');
     homepage.forEach((btn) => {
-        btn.addEventListener('click', homePage);
+        btn.addEventListener('click',homePage);
     });
 }
 
@@ -77,6 +77,10 @@ function displayHomepage(){
     tiny.addEventListener("swipeleft", goAway);
     tiny.addEventListener("swiperight", stay);
 //     tiny.addEventListener("revealleft", removeFav);
+if (cards.length >= 3) {
+    console.log("Fetch more people")
+    ready();
+}
  }
 
  //SPA Pages
@@ -96,9 +100,13 @@ function goAway(ev) {
     console.log("swipe left");
     let div = ev.currentTarget;
     div.classList.add("goleft");
+    document.getElementById("overlay").style.display = "block";
+    let p = document.getElementById("overlayP");
+    p.innerHTML = "Nope!"
     setTimeout(
       function() {
         this.parentElement.removeChild(this);
+        document.getElementById("overlay").style.display = "none";
         displayHomepage();
       }.bind(div),
       500
@@ -110,8 +118,12 @@ function stay(ev){
     console.log("swipe right");
     let div = ev.currentTarget;
     div.classList.add("goRight");
+    document.getElementById("overlay").style.display = "block";
+    let p = document.getElementById("overlayP");
+    p.innerHTML = "Match!"
     setTimeout(
         function() {
+            document.getElementById("overlay").style.display = "none";
           this.parentElement.removeChild(this);
           displayHomepage();
         }.bind(div),

@@ -16,10 +16,11 @@ function init() {
     });
     let homepage = document.querySelectorAll('#homBtn');
     homepage.forEach((btn) => {
-        btn.addEventListener('click', homePage);
+        btn.addEventListener('click',homePage);
     });
 }
 
+//Get the Profiles
 function ready() {
     let url = "http://griffis.edumedia.ca/mad9022/tundra/get.profiles.php?";
     fetch(url)
@@ -40,8 +41,8 @@ function ready() {
         });
 }
 
+//Make the People
 function cards() {
-
     profileInfo.forEach(item => {
     let section = document.querySelector('.first');    
     let div = document.createElement("div");
@@ -67,6 +68,14 @@ function cards() {
     displayHomepage();
 }
 
+function overlay(){
+    document.getElementById("overlay").style.display = "block";
+   // document.getElementById("overlayP");
+
+
+}
+
+//Swipes
 function displayHomepage(){
     let target = document.querySelector("#first > div");
     console.log(target);
@@ -77,6 +86,7 @@ function displayHomepage(){
 //     tiny.addEventListener("revealleft", removeFav);
  }
 
+ //SPA Pages
 function favPage() {
     pages[0].classList.remove('active');
     pages[1].classList.add('active');
@@ -86,17 +96,17 @@ function homePage(){
     pages[1].classList.remove('active');
     pages[0].classList.add('active');
 }
+ 
 
-
+//Left Swipe Delete
 function goAway(ev) {
     console.log("swipe left");
     let div = ev.currentTarget;
     div.classList.add("goleft");
-    //div.classList.remove("active");
-    //div.classList.add("left");
     setTimeout(
       function() {
-        //remove the div from its parent element after 0.5s
+        document.getElementById("overlay").style.display = "block";
+        document.getElementById("p").textContent = "It's a no from me!"
         this.parentElement.removeChild(this);
         displayHomepage();
       }.bind(div),
@@ -104,13 +114,13 @@ function goAway(ev) {
     );
   }
 
+//Right Swipe Keep
 function stay(ev){
     console.log("swipe right");
     let div = ev.currentTarget;
     div.classList.add("goRight");
     setTimeout(
         function() {
-          //remove the div from its parent element after 0.5s
           this.parentElement.removeChild(this);
           displayHomepage();
         }.bind(div),
@@ -123,10 +133,10 @@ function stay(ev){
         }
     })
     sessionStorage.setItem(rightSwipesKey, JSON.stringify(rightSwipes));
-   // console.log(rightSwipes);
     savedPeople();
 }
 
+//Saved People Favourites List 
 function savedPeople(){
     let section = document.querySelector('.list-view');
     section.innerHTML ="";  
@@ -158,8 +168,17 @@ function savedPeople(){
 
 }
 
-
 function removeFav(item){
-    
-  
+    let profileId = item.id;
+    let items = JSON.parse(sessionStorage.getItem(rightSwipesKey));
+    for (let i =0; i< items.length; i++) {
+        let card = items[i];
+        if (card.id === profileId) {
+            items.splice(i, 1);
+            console.log("delcard");
+            rightSwipes = items;
+        }
+    }
+    sessionStorage.setItem(rightSwipesKey, JSON.stringify(rightSwipes));
+    savedPeople();
 }

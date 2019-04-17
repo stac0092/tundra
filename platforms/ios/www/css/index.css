@@ -12,3 +12,15 @@
 #bartop{
 	padding-top: 2rem;
 }
+
+#overlay{
+	display: none;
+	opacity: 100%;
+}
+
+
+#overlayP{
+	font-size: 40px;
+	color: antiquewhite;
+	text-align: center;
+}

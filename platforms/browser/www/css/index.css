@@ -8,3 +8,11 @@
 .list-text{
 	color: blueviolet;
 }
+
+#bartop{
+	padding-top: 2rem;
+}
+
+.overlay{
+	display: none;
+}
